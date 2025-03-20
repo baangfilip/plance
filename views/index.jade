@@ -1,0 +1,51 @@
+extends layout
+
+block content
+    script(src='/javascripts/home.js')
+    script(type='text/javascript', src="/socket.io/socket.io.js")
+    include ./topbar.jade
+    #actionbar
+
+    // Wrapper
+    #wrapper.width960
+        if user        
+            h2 #{lang.NewProject}
+            .area
+                .addarea 
+                    .icon-addprojectarea
+                    input#title(type='text', placeholder='#{lang.AddProjectInputHelp}' autocomplete='off')
+                    .addmoreinformation
+                        i#iconProjectPublic.fa.fa-lock 
+                        label(for="inputProjectPublic")  !{lang.AccessWithoutLogin}: 
+                        input#inputProjectPublic(type='checkbox', placeholder='#{lang.Public}', data-on-label='#{lang.Yes}', data-off-label='#{lang.No}', data-off-title='#{lang.AccessWithoutLoginNoHelp}', data-on-title='#{lang.AccessWithoutLoginYesHelp}')
+                        br
+                        i#iconProjectGroup.fa.fa-user 
+                        span(title='#{lang.ProjectGroupHelper}')  !{lang.Group} 
+                        select#inputProjectGroup 
+                        br
+                        br
+                        button.submit#btnAddProject !{lang.AddProject}
+
+                        button.cancel#btncancel !{lang.Cancel}
+        else
+            h2#logintitle #{lang.Login}
+            .area
+                #signinarea.addarea 
+                    .icon-addprojectarea
+                    input#username(type='text', placeholder='#{lang.Username}' autocomplete='off')
+                    .addmoreinformation
+                        p !{lang.Password}: 
+                        input#inputPassword(type='password', placeholder='#{lang.Password}')
+                        
+                        br
+                        button.submit#btnLogin !{lang.Login}
+                        button.cancel#btnForgotPassword !{lang.ForgotPassword}
+        #lift-container
+            h2 !{title}
+            ul#projects
+    // WRAPPER
+
+    #footer
+        .icon-footer
+        #usercount
+    // footer

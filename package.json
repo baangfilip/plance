@@ -1,0 +1,25 @@
+{
+  "name": "Plance",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "express": "~4.0.0",
+    "jade": "*",
+    "morgan": "~1.0.0",
+    "serve-favicon": "*",
+    "socket.io": "^1.3.5",
+    "logger": "*",
+    "passport-local": "^1.0.0",
+    "passport": "^0.2.1",
+    "method-override": "^2.2.0",
+    "express-session": "^1.8.2",
+    "q": "*",
+    "mysql": "^2.9.0"
+  }
+}

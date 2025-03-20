@@ -1,0 +1,43 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        link(rel='stylesheet', href='/imports/loadingbar/pace.css')
+        link(rel='stylesheet', href='/imports/remodal/remodal-default-theme.css')
+        link(rel='stylesheet', href='/imports/jquery-ui/jquery-ui.min.css')
+        link(rel='stylesheet', href='/imports/normalize.css')
+        link(rel='stylesheet', href='/imports/remodal/remodal.css')
+        link(rel='stylesheet', href='/imports/colorpicker/jquery.minicolors.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='icon', href='/favicon.ico', type='image/x-icon') 
+        link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+        link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css')
+        script.
+            window.REMODAL_GLOBALS = {
+              DEFAULTS: {
+                hashTracking: false
+              }
+            };
+            window.paceOptions = {
+                ghostTime: 400,
+                ajax: {
+                    trackWebSockets: false
+                }
+            }
+            var project = !{project ? JSON.stringify(project) : "undefined"};
+            var readonly = #{readonly ? readonly : 0};
+            var lang = !{JSON.stringify(lang)};
+            var user = !{user ? JSON.stringify(user) : "undefined"};
+        script(src='/imports/jquery-2.1.4.js')
+        script(src='/javascripts/lift-module.js')
+        script(src='/imports/jquery-ui/jquery-ui.min.js')
+        script(src='/imports/jquery-dateFormat.min.js')
+        script(src='/imports/jquery-ui/jquery-ui-touch-punch.js')
+        script(src='/imports/remodal/remodal.js')
+        script(src='/imports/loadingbar/pace.js')
+        script(src='/imports/bootstrap-checkbox.min.js')
+        script(src='/imports/colorpicker/jquery.minicolors.min.js')
+    body
+        block content
+        script(src='/javascripts/global.js')

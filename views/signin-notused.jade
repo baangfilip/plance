@@ -1,0 +1,63 @@
+extends layout
+
+block content
+    script(src='/javascripts/signin.js')
+    script(type='text/javascript', src="/socket.io/socket.io.js")
+    link(rel='stylesheet', href='/stylesheets/style-old.css')
+    // header
+    #header
+        h1.icon-title= title
+        #buttons
+            #buttontwo.icon-button Aktivteter
+            #buttonone.icon-button  Körningar
+            #buttonthree.icon-button Grafer
+        // search
+        #search
+            input#searchinput(type='text', placeholder='Search for run och statistic...')
+    // end header
+    // Wrapper
+    #wrapper
+        h2 Sign in
+        .area
+            #signinarea
+                //- if (locals.user)
+                //    p Welcome to #{title}, #{user.username}
+                //- else 
+                p Sign in with your username and password
+                #area
+                    div.label 
+                        span Username: 
+                    input#inputUsername(type='text', placeholder='')
+                    div.label 
+                        span Password: 
+                    input#inputPassword(type='text', placeholder='')
+                    br
+                    input#signinButton(type='button', value='Signin')
+            
+        h2 Become a member
+        .area
+            .addarea 
+                .icon-addarea
+                input#title(type='text', placeholder='Choose username' autocomplete='off')
+                .addmoreinformation
+                    p First name: 
+                    input#inputstatDiagramID(type='text', placeholder='First name')
+                    
+                    p Last name: 
+                    input#inputstatActivityID(type='text', placeholder='Last name')
+                    
+                    p Emailadress: 
+                    input#inputstatVersionID(type='text', placeholder='Emailadress')
+                    
+                    p Company: 
+                    input#inputstatRunID(type='text', placeholder='Company')
+                    
+                    
+                    br
+                    button.submit#btnAddstat Sign up
+
+                    button.cancel#btncancel Cancel
+    #footer
+        .icon-footer
+        #usercount
+    // /footer

@@ -1,0 +1,145 @@
+extends layout
+
+block content
+    script(src='/javascripts/project.js')
+    script(type='text/javascript', src="/socket.io/socket.io.js")
+    include ./topbar.jade
+    #actionbar
+      #addlist.button(title="#{lang.AddList}")
+      i#zoom-in.button.fa.fa-search-plus(title="#{lang.ZoomIn}")
+      #zoom-out.button.fa.fa-search-minus(title="#{lang.ZoomOut}")
+      #vertical.button.fa.fa-list.fa-rotate-90(title="#{lang.ToggleVerticalHelp}")
+      #truepoints.button.fa.fa-calendar(title="#{lang.ToggleTruePointsHelp}")
+      #showfinished.button.fa.fa-calendar-check-o(title="#{lang.ToggleFinishedHelp}")
+      span#zoom-warning
+    // Wrapper
+    #wrapper.list
+        #lift-container
+
+    .remodal(data-remodal-id="modal")
+        button.remodal-close(data-remodal-action="close")
+        #modal-container
+            input#project-title.name(type="text" value="Name")
+            table.modalTable
+                tr
+                    td.label ID:
+                    td#project-id.value
+                tr
+                    td.label #{lang.Created}:
+                    td#project-created.value
+                tr
+                    td.label #{lang.AccessWithoutLogin}:
+                    td#project-public.value
+                tr
+                    td.label #{lang.Private} (Only owner can change it):
+                    td#project-private.value
+                //tr
+                //    td.label #{lang.Changed}:
+                //    td#listmodified.value
+                //tr
+                //    td.label #{lang.Participants}:
+                //    td#listparticipants.value
+                //tr
+                //    td.label #{lang.PointsFinished}:
+                //    td#listpointsfinished.value
+                //tr
+                //    td.label #{lang.TotalPoints}:
+                //    td#listtotalpoints.value
+                //tr
+                //    td.label #{lang.Views}:
+                //    td#listviews.value
+        //if !readonly
+        button.remodal-cancel(data-remodal-action="cancel").
+            #{lang.Cancel}
+        button(onclick="liftmodule.updateProject()").remodal-confirm(data-remodal-action="confirm").
+            #{lang.Save}
+
+    .remodal(data-remodal-id="modal-item")
+        button.remodal-close(data-remodal-action="close")
+        #modal-container
+            input#title.name(type="text")
+            table.modalTable
+                tr
+                    td.label ID:
+                    td#itemid.value
+                tr
+                    td.label #{lang.Created}:
+                    td#itemcreated.value
+                tr
+                    td.label #{lang.Changed}:
+                    td#itemmodified.value
+                tr
+                    td.label #{lang.Points}:
+                    td
+                      input#points.value
+                tr
+                    td.label #{lang.Link}:
+                    td
+                      input#item-link.value
+                tr
+                    td.label #{lang.Views}:
+                    td#views.value
+                tr
+                    td.label #{lang.Progress}:
+                    td
+                      input#progress.value
+                tr
+                    td.label #{lang.Owner}:
+                    td
+                      input#ownerid.value
+                tr
+                    td.label #{lang.Category}:
+                    td
+                      input#category.value
+                tr
+                    td(colspan="2")
+                        textarea#text
+        //if !readonly
+        button.remodal-cancel(data-remodal-action="cancel" onclick="liftmodule.removeItem()").
+            #{lang.RemoveItem}
+        button.remodal-cancel(data-remodal-action="cancel").
+            #{lang.Cancel}
+        button(onclick="liftmodule.updateItem()").remodal-confirm(data-remodal-action="confirm").
+            #{lang.Save}
+
+    .remodal(data-remodal-id="modal-list-name")
+        button.remodal-close(data-remodal-action="close")
+        #modal-container
+            input#list-title.name(type="text" value="Name")
+            table.modalTable
+                tr
+                    td.label ID:
+                    td#list-id.value
+                tr
+                    td.label #{lang.Created}:
+                    td#list-created.value
+                tr
+                    td.label #{lang.Changed}:
+                    td#list-modified.value
+                tr
+                    td.label #{lang.Ruler}:
+                    td#list-ruler.value
+                tr
+                    td.label #{lang.User}:
+                    td
+                      input#list-userid.value 
+                tr
+                    td.label #{lang.Link}:
+                    td
+                      input#list-link.value
+                tr
+                    td(colspan="2")
+                        textarea#list-text.value
+        //if !readonly
+        button.remodal-cancel(data-remodal-action="cancel" onclick="liftmodule.removeList()").
+            #{lang.RemoveList}
+        button.remodal-cancel(data-remodal-action="cancel").
+            #{lang.Cancel}
+        button.remodal-confirm(onclick="liftmodule.updateList()" data-remodal-action="confirm").
+            #{lang.Save}
+    // WRAPPER
+
+    #footer
+        .icon-footer
+        #usercount(title="#{lang.UsersInProjectHelp}")
+    // footer

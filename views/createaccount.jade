@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    script(src='/javascripts/createaccount.js')
+    script(type='text/javascript', src="/socket.io/socket.io.js")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    include ./topbar.jade
+    #actionbar
+
+    // Wrapper
+    #wrapper.width960
+        h2#createtitle #{lang.CreateAccount}
+        .area
+            .addarea 
+                .icon-addprojectarea
+                input#username(type='text', placeholder='#{lang.Username}' autocomplete='off')
+                .addmoreinformation
+                    p !{lang.Password}: 
+                    input#inputPassword.password(type='password', placeholder='#{lang.Password}')
+                    p !{lang.PasswordAgain}: 
+                    input#inputPasswordAgain.password(type='password', placeholder='#{lang.Password}')
+                    p !{lang.Email}: 
+                    input#email(type='text', placeholder='#{lang.Email}')
+                    .information
+                    br
+                    button.submit#btnCreateAccount !{lang.CreateAccount}
+                    button.cancel#btncancel !{lang.Cancel}
+    // WRAPPER
+
+    #footer
+        .icon-footer
+        #usercount
+    // footer

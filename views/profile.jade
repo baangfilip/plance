@@ -1,0 +1,62 @@
+extends layout
+
+block content
+    script(src='/javascripts/profile.js')
+    script(type='text/javascript', src="/socket.io/socket.io.js")
+    include ./topbar.jade
+    #actionbar
+
+    // Wrapper
+    #wrapper.width960
+        h2#createtitle #{lang.UserProfile}
+        .area
+            .addarea 
+                .icon-addprojectarea
+                input#username(type='text', placeholder='#{lang.Username}' autocomplete='off' disabled)
+                .addmoreinformation
+                    p !{lang.Password}: 
+                    input#inputPassword.password(type='password', placeholder='#{lang.Password}')
+                    p !{lang.PasswordAgain}: 
+                    input#inputPasswordAgain.password(type='password', placeholder='#{lang.Password}')
+                    p !{lang.Email}: 
+                    input#email(type='text', placeholder='#{lang.Email}')
+                    .information
+                    br
+                    button.submit#btnUpdateAccount !{lang.UserProfileUpdate}
+                    button.cancel#btnreset !{lang.Cancel}
+
+        h2.groupheader(title='#{lang.YourMembershipsHelp}') !{lang.YourMemberships}
+        .grouparea
+            ul#membership
+
+
+        h2.groupheader(title='#{lang.YourGroupsHelp}') !{lang.YourGroups}
+        .grouparea
+            ul#groupadmin
+                li.addGroup
+                    input#groupname(type='text', placeholder='#{lang.CreateGroup}')
+                    .addGroupMoreInformation
+                        input#groupcolor(type='text', placeholder='#{lang.GroupColor}')
+                        br
+                        label(for='groupopen') #{lang.GroupOpen}: 
+                        input#groupopen(type='checkbox', data-on-label='#{lang.Yes}', data-off-label='#{lang.No}', data-off-title='#{lang.AccessWithoutLoginNoHelp}', data-on-title='#{lang.AccessWithoutLoginYesHelp}')
+                        .groupinformation
+                        br
+                        button.submit#btnCreateGroup !{lang.Create}
+                        button.cancel#btnresetgroup !{lang.Cancel}
+
+        h2.groupheader(title='#{lang.OpenGroupsHelp}') !{lang.Groups}
+        .grouparea
+            ul#opengroups
+
+        h2.groupheader(title='#{lang.GroupInvitesHelp}') !{lang.GroupInvites}
+        .grouparea
+            ul#groupinvites
+        
+
+    // WRAPPER
+
+    #footer
+        .icon-footer
+        #usercount
+    // footer

@@ -1,0 +1,160 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('lift:server');
+var http = require('http');
+var _ = require('underscore');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+var userCount = 0;
+var io = require('socket.io').listen(server);
+var rooms = [];
+io.sockets.on('connection', function (socket) {
+    //SECURITY
+    //-------- Check fields for <script tag before emit??
+    //SECURITY
+    userCount++;
+    socket.emit('info', { userCount: userCount });
+    //socket.emit('alertNewUser', { msg: 'The world is round, there is no up or down.' });
+    socket.on('disconnect', function(){
+      userCount--;
+      socket.emit('info', { userCount: userCount });
+    });
+    socket.on('joinroom', function(object) {
+      socket.join(object.uuid);
+      var room = _.find(rooms, function(item) { return item.name === object.uuid });
+      if (room) {
+        console.log("FOUND");
+        room.users.push(object.username);
+      }else{
+        console.log("NOT FOUND");
+        rooms.push({name: object.uuid, users: [object.username]});
+      }
+      io.to(object.uuid).emit('roomcount', { users: room.users });
+    });
+    socket.on('leaveroom', function(object) {
+      socket.leave(object.uuid);   
+      var room = _.find(rooms, function(item) { return item.name === object.uuid })
+      if (room) {
+        console.log("LEAVE FOUND");
+        room.users = room.users.splice(room.users.indexOf(object.username), 1);
+        //room.users = _.without(room.users, object.username);
+      }
+      io.to(object.uuid).emit('roomcount', { users: room.users });
+    });
+
+    socket.on('itemmove', function(msg){
+      io.to(msg.uuid).emit('itemmove', msg);
+    });
+    socket.on('itemupdate', function(msg){
+      io.to(msg.uuid).emit('itemupdate', msg);
+    });
+    socket.on('listupdate', function(msg){
+      io.to(msg.uuid).emit('listupdate', msg);
+    });
+    socket.on('additem', function(msg){
+      io.to(msg.uuid).emit('additem', msg);
+    });
+    socket.on('addlist', function(msg){
+      io.to(msg.uuid).emit('addlist', msg);
+    });
+    socket.on('remove', function(msg){
+      io.to(msg.uuid).emit('remove', msg);
+    });
+    socket.on('updateListPosition', function(msg){
+      console.log(msg);
+      io.to(msg.uuid).emit('updateListPosition', msg);
+    });
+    socket.on('addproject', function(msg){
+      io.emit('addproject', msg);
+    });
+    socket.on('removeproject', function(msg){
+      io.emit('removeproject', msg);
+    });
+});
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+
+

@@ -1,0 +1,105 @@
+extends layout
+
+block content
+    script(src='/javascripts/home.js')
+    script(type='text/javascript', src="/socket.io/socket.io.js")
+    #topBar
+        span#header-title
+    #actionbar
+      #addlist.button
+      #settings.button.settings(data-remodal-target="modal")
+    // Wrapper
+    #wrapper
+        #lift-container
+
+    .remodal(data-remodal-id="modal")
+        button.remodal-close(data-remodal-action="close")
+        #modal-container
+            input#title.name(type="text" value="Name")
+            table.modalTable
+                tr
+                    td.label ID:
+                    td#listid.value
+                tr
+                    td.label Skapad:
+                    td#listcreated.value
+                tr
+                    td.label Ändrad:
+                    td#listmodified.value
+                tr
+                    td.label Deltagare:
+                    td#listparticipants.value
+                tr
+                    td.label Poäng avklarade:
+                    td#listpointsfinished.value
+                tr
+                    td.label Totala poäng:
+                    td#listtotalpoints.value
+                tr
+                    td.label Visningar:
+                    td#listviews.value
+        button.remodal-cancel(data-remodal-action="cancel").
+            Cancel
+        button.remodal-confirm(data-remodal-action="confirm").
+            OK
+
+    .remodal(data-remodal-id="modal-item")
+        button.remodal-close(data-remodal-action="close")
+        #modal-container
+            input#title.name(type="text" value="Name")
+            table.modalTable
+                tr
+                    td.label ID:
+                    td#listid.value
+                tr
+                    td.label Skapad:
+                    td#listcreated.value
+                tr
+                    td.label Ändrad:
+                    td#listmodified.value
+                tr
+                    td.label Poäng:
+                    td#points.value
+                tr
+                    td.label Länk:
+                    td#item-link.value
+                tr
+                    td.label Visningar:
+                    td#views.value
+                tr
+                    td.label Kategori:
+                    td#category.value
+        button.remodal-cancel(data-remodal-action="cancel").
+            Cancel
+        button.remodal-confirm(data-remodal-action="confirm").
+            OK
+
+    .remodal(data-remodal-id="modal-list-name")
+        button.remodal-close(data-remodal-action="close")
+        #modal-container
+            input#list-title.name(type="text" value="Name")
+            table.modalTable
+                tr
+                    td.label ID:
+                    td#listid.value
+                tr
+                    td.label Skapad:
+                    td#list-created.value
+                tr
+                    td.label Ändrad:
+                    td#list-modified.value
+                tr
+                    td.label Ruler:
+                    td#list-ruler.value
+        button.remodal-cancel(data-remodal-action="cancel").
+            Remove
+        button.remodal-cancel(data-remodal-action="cancel").
+            Cancel
+        button.remodal-confirm(data-remodal-action="confirm").
+            OK
+    // WRAPPER
+
+    #footer
+        .icon-footer
+        #usercount
+    // footer

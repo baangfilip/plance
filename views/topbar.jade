@@ -1,0 +1,11 @@
+#topBar
+        a(href='/')
+            span#header-back(title="#{lang.BackHelp}")
+        span#header-title(data-remodal-target="modal")
+        if user
+            #menu 
+                a#user(href='/profile' title="#{lang.UserProfile}") !{user.username}
+                a#logout(href='/logout' title="#{lang.Logout}") !{lang.Logout}
+        else
+            #menu 
+                a#createaccount(href='/createaccount') !{lang.CreateAccount}
