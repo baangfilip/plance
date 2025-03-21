@@ -45,7 +45,7 @@ io.sockets.on('connection', function (socket) {
         console.log("NOT FOUND");
         rooms.push({name: object.uuid, users: [object.username]});
       }
-      io.to(object.uuid).emit('roomcount', { users: room.users });
+      io.to(object.uuid).emit('roomcount', { users: room && room.users ? room.users : 0 });
     });
     socket.on('leaveroom', function(object) {
       socket.leave(object.uuid);   

@@ -11,7 +11,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 /* END LOGIN MODULES */ 
 
-var advLogger = require('logger').logg("Startup");
+var advLogger = require('./logger.js').logg("Startup");
 
 // Database
 /*

@@ -2,10 +2,10 @@
 var mysql = require('mysql');
 var pool  = mysql.createPool({
   connectionLimit : '25',
-  host     : 'localhost',
+  host     : 'database',
   database : 'plance',
-  user     : 'user',
-  password : 'password'
+  user     : 'root',
+  password : 'rootroot'
 });
 
 module.exports = pool;

@@ -9,3 +9,6 @@ Just a little nostaligic project.
 ![plance](./readme-media/plance.jpg)
 
 ![plance list](./readme-media/plance-list.jpg)
+
+
+Run with compose up and password for admin is test

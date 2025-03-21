@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+dbexport.sql
+readme.md
+readme-media/**
